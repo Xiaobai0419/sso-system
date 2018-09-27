@@ -1,0 +1,20 @@
+auth-server: http://sso-login:8082/uaa # sso-server地址
+#auth-server: http://sso-login:8767 # sso-server地址
+server:
+  context-path: /client1
+  port: 8083
+security:
+  oauth2:
+    client:
+#      client-id: client
+#      client-secret: secret
+      client-id: merryyou1
+      client-secret: merryyousecrect1
+      user-authorization-uri: ${auth-server}/oauth/authorize #请求认证的地址
+      access-token-uri: ${auth-server}/oauth/token #请求令牌的地址
+    resource:
+      jwt:
+        key-uri: ${auth-server}/oauth/token_key #解析jwt令牌所需要密钥的地址
+messages:
+  url: http://sso-resource:8085
+#yml要求各层次间必须空格统一！！不能用tab,也不允许同一层的空格不一致造成的不对齐！否则Spring Boot报错！！
